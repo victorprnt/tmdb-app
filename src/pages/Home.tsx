@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react'
-import MovieCard from '../components/MovieCard'
-import { getTrendingMovies } from '../services/movie-services'
+import React, { useContext, useEffect, useState } from 'react'
+import Main from '../components/Main'
+
+import { MovieContext } from '../context/MovieContext'
 
 const Home = () => {
+  const { fetchTrendingMovies } = useContext(MovieContext)
+  const [page, setPage] = useState(1)
+
   useEffect(() => {
-    console.log(getTrendingMovies(1))
-  }, [])
-  return <MovieCard />
+    fetchTrendingMovies(page)
+  }, [fetchTrendingMovies, page])
+
+  return <Main />
 }
 
 export default Home

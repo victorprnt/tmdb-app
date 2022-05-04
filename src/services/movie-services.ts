@@ -10,3 +10,14 @@ export async function getTrendingMovies(pageNumber: number) {
     return { error }
   }
 }
+
+export async function getMovieDetail(movieId: string) {
+  try {
+    const { data, status } = await api.get(
+      `/movie/${movieId}?api_key=${process.env.REACT_APP_TMDB_KEY}&language=pt-BR`
+    )
+    return { data, status }
+  } catch (error) {
+    return { error }
+  }
+}

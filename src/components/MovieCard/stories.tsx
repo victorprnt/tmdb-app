@@ -6,4 +6,4 @@ export default {
   component: MovieCard
 } as Meta
 
-export const Default: Story = () => <MovieCard />
+// export const Default: Story = () => <MovieCard />
