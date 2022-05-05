@@ -1,13 +1,17 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+
 import { MovieProvider } from './context/MovieContext'
-import Home from './pages/Home'
+import AppRoutes from './routes'
 import GlobalStyles from './styles/global'
 
 function App() {
   return (
     <MovieProvider>
-      <GlobalStyles />
-      <Home />
+      <BrowserRouter>
+        <GlobalStyles />
+        <AppRoutes />
+      </BrowserRouter>
     </MovieProvider>
   )
 }
