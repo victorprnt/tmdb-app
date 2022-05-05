@@ -15,7 +15,7 @@ const MovieCard = ({
   size = 'normal'
 }: MovieCardProps) => (
   <S.Wrapper size={size}>
-    <a key={Math.random()} href={`/movies/${id}`}>
+    <a key={Math.random()} href={`/movie/${id}`}>
       {(size === 'highlight' || 'large') && (
         <img
           src={`https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${backdrop_path}`}

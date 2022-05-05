@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useState } from 'react'
 import {
   fetchUpcomingMovies,
-  fetchTrendingMovies
+  fetchTrendingMovies,
+  fetchMovieDetail
 } from '../services/movie-services'
 
 export type MovieCardProps = {
@@ -24,11 +25,33 @@ export type UpcomingMovieProps = {
   video: boolean
 }
 
+type MovieGenreProps = {
+  id: number
+  name: string
+}
+
+export type MovieDetailProps = {
+  id: number
+  title: string
+  release_date: string
+  poster_path: string
+  backdrop_path: string
+  original_title: string
+  overview: string
+  runtime: number
+  genres: MovieGenreProps[]
+  // cast: CastProps[];
+  // crew: CrewProps[];
+  // social: SocialProps[];
+}
+
 interface MovieContextData {
   movies: MovieCardProps[]
   upcomingMovies: UpcomingMovieProps[]
+  movieDetail: MovieDetailProps
   getTrendingMovies: (page: number) => void
   getUpcomingMovies: () => void
+  getMovieDetails: (movieId: string) => void
 }
 
 interface MovieProviderProps {
@@ -40,6 +63,17 @@ export const MovieContext = createContext({} as MovieContextData)
 export function MovieProvider({ children }: MovieProviderProps) {
   const [movies, setMovies] = useState<MovieCardProps[]>([])
   const [upcomingMovies, setUpcomingMovies] = useState<UpcomingMovieProps[]>([])
+  const [movieDetail, setMovieDetail] = useState<MovieDetailProps>({
+    id: 0,
+    title: '',
+    release_date: '',
+    poster_path: '',
+    backdrop_path: '',
+    original_title: '',
+    overview: '',
+    runtime: 0,
+    genres: []
+  })
 
   async function getTrendingMovies(page: number) {
     const { data } = await fetchTrendingMovies(page)
@@ -54,9 +88,24 @@ export function MovieProvider({ children }: MovieProviderProps) {
     console.log(upcomingMovies)
   }
 
+  async function getMovieDetails(movieId: string) {
+    console.table(movieId)
+    const { data } = await fetchMovieDetail(movieId)
+    setMovieDetail(data)
+    console.log('movieDetail')
+    console.table(movieDetail)
+  }
+
   return (
     <MovieContext.Provider
-      value={{ movies, upcomingMovies, getTrendingMovies, getUpcomingMovies }}
+      value={{
+        movies,
+        upcomingMovies,
+        movieDetail,
+        getTrendingMovies,
+        getUpcomingMovies,
+        getMovieDetails
+      }}
     >
       {children}
     </MovieContext.Provider>
