@@ -6,7 +6,7 @@ export const Wrapper = styled.section`
   align-items: center;
 
   max-height: 100%;
-  width: 70%;
+  width: 75%;
 
   margin: 0 auto;
 

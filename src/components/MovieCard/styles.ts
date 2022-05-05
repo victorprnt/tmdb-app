@@ -74,7 +74,7 @@ const wrapperSizeModifiers = {
   `,
   highlight: () => css`
     width: 100%;
-    height: 300px;
+    height: 40vh;
     margin-bottom: 3rem;
     .movie-infos {
       max-width: fit-content;

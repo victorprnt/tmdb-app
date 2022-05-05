@@ -16,14 +16,14 @@ const MovieCard = ({
 }: MovieCardProps) => (
   <S.Wrapper size={size}>
     <a key={Math.random()} href={`/movies/${id}`}>
-      {size === 'normal' && (
-        <img src={poster_path} alt={`{title} movie poster`} />
-      )}
-      {size === ('highlight' || 'large') && (
+      {(size === 'highlight' || 'large') && (
         <img
-          src={`	https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${backdrop_path}`}
+          src={`https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${backdrop_path}`}
           alt={`{title} movie poster`}
         />
+      )}
+      {size === 'normal' && (
+        <img src={poster_path} alt={`{title} movie poster`} />
       )}
       <div>
         {size === 'large' && <p className="new-tag">NEW</p>}
