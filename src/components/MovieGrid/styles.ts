@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import theme from '../../styles/light'
+
 export const Wrapper = styled.section`
   /* display: flex;
   flex-direction: column; */
@@ -34,6 +36,10 @@ export const Wrapper = styled.section`
     &:hover {
       background-color: #8a8a8a;
     }
+  }
+
+  @media (max-width: ${theme.screenSize.laptop}) {
+    width: 100%;
   }
 `
 

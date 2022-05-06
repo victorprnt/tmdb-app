@@ -13,17 +13,17 @@ const GlobalStyles = createGlobalStyle`
     font-size: 62.5%;
   }
 
-  /* @media (max-width: ${theme.screenSize.laptop}) {
+  @media (max-width: ${theme.screenSize.laptop}) {
     html {
-      font-size: 93.75%;
+      font-size: 58%;
     }
   }
 
   @media (max-width: ${theme.screenSize.tablet}) {
     html {
-      font-size: 87.5%;
+      font-size: 40%;
     }
-  } */
+  }
 
   html, body {
     height: 100%;

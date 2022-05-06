@@ -3,7 +3,8 @@ import {
   fetchUpcomingMovies,
   fetchTrendingMovies,
   fetchMovieDetail,
-  fetchCredits
+  fetchCredits,
+  fetchSearchResult
 } from '../services/movie-services'
 
 export type MovieCardProps = {
@@ -63,10 +64,13 @@ interface MovieContextData {
   upcomingMovies: UpcomingMovieProps[]
   movieDetail: MovieDetailProps
   casting: MovieCastProps[]
+  searchResult: MovieCardProps[]
   getTrendingMovies: (page: number) => void
   getUpcomingMovies: () => void
   getMovieDetails: (movieId: string) => void
   getCredits: (movieId: string) => void
+  getSearchResult: (searchQuery: string) => void
+  handleQueryMovies: () => void
 }
 
 interface MovieProviderProps {
@@ -80,6 +84,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [upcomingMovies, setUpcomingMovies] = useState<UpcomingMovieProps[]>([])
   const [casting, setCasting] = useState<MovieCastProps[]>([])
   const [crew, setCrew] = useState<MovieCrewProps[]>([])
+  const [searchResult, setSearchResult] = useState<MovieCardProps[]>([])
   const [movieDetail, setMovieDetail] = useState<MovieDetailProps>({
     id: 0,
     title: '',
@@ -122,6 +127,17 @@ export function MovieProvider({ children }: MovieProviderProps) {
     console.log(crew)
   }
 
+  async function getSearchResult(searchQuery: string) {
+    const { data } = await fetchSearchResult(searchQuery)
+    setSearchResult(data.results)
+    console.log('searchResult')
+    console.log(searchResult)
+  }
+
+  function handleQueryMovies() {
+    setSearchResult(searchResult)
+  }
+
   return (
     <MovieContext.Provider
       value={{
@@ -129,10 +145,13 @@ export function MovieProvider({ children }: MovieProviderProps) {
         upcomingMovies,
         movieDetail,
         casting,
+        searchResult,
         getTrendingMovies,
         getUpcomingMovies,
         getMovieDetails,
-        getCredits
+        getCredits,
+        getSearchResult,
+        handleQueryMovies
       }}
     >
       {children}

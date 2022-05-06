@@ -78,6 +78,9 @@ export const Wrapper = styled.main`
       width: 50rem;
       border-radius: 0.25rem;
     }
+    @media (max-width: ${theme.screenSize.laptop}) {
+      display: none;
+    }
   }
 
   .backdrop {
@@ -104,9 +107,10 @@ export const Wrapper = styled.main`
   }
   @media (max-width: ${theme.screenSize.tablet}) {
   }
-  @media (max-width: ${theme.screenSize.mobileL}) {
+  @media (max-width: ${theme.screenSize.laptop}) {
     display: flex;
     position: relative;
+    padding-top: 2rem;
     /* grid-template-rows: 1fr 3fr;
     grid-template-columns: none;
     grid-template-areas:
@@ -116,8 +120,8 @@ export const Wrapper = styled.main`
       margin-top: 8rem;
       padding: 0 1rem;
       h1 {
-        font-size: ${theme.fontSize.smallText};
-        line-height: 2rem;
+        font-size: ${theme.fontSize.title};
+        line-height: 120%;
       }
     }
     .bullet-info {
@@ -125,7 +129,7 @@ export const Wrapper = styled.main`
         color: ${theme.colors.lightText};
         & + span {
           margin-left: 0;
-          margin-bottom: 0.5rem;
+          /* margin-bottom: 0.5rem; */
         }
         .runtime {
           text-align: right;

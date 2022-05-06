@@ -7,7 +7,7 @@ export default {
     menuIcons: '#9CADC3',
     title: '#363F5F',
     titleHover: '#00B4D8',
-    lightText: '#AAA',
+    lightText: '#bbb',
     scrollBar: '#BBB',
     scrollHover: '#999',
     placeHolder: '#969CB2',

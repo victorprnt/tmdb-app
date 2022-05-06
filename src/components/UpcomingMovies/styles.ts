@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import theme from '../../styles/light'
+
 export const Wrapper = styled.section`
   h1 {
     margin: 0 auto 4rem 3rem;
@@ -35,5 +37,9 @@ export const Wrapper = styled.section`
     &:hover {
       background-color: #8a8a8a;
     }
+  }
+
+  @media (max-width: ${theme.screenSize.laptop}) {
+    display: none;
   }
 `

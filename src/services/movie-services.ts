@@ -43,3 +43,14 @@ export async function fetchCredits(movieId: string) {
     return { error }
   }
 }
+
+export async function fetchSearchResult(movieName: string) {
+  try {
+    const { data, status } = await api.get(
+      `search/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=pt-BR&query=${movieName}&page=1&include_adult=false`
+    )
+    return { data, status }
+  } catch (error) {
+    return { error }
+  }
+}
