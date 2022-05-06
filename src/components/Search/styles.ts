@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
 
     input {
       /* max-width: 25rem; */
-      width: 25rem;
+      width: 26rem;
       height: 1.5rem;
       padding: 1rem;
       background-color: #e7e9ee;

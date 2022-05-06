@@ -61,6 +61,7 @@ export type MovieDetailProps = {
 
 interface MovieContextData {
   movies: MovieCardProps[]
+  highlight: MovieCardProps
   upcomingMovies: UpcomingMovieProps[]
   movieDetail: MovieDetailProps
   casting: MovieCastProps[]
@@ -85,6 +86,15 @@ export function MovieProvider({ children }: MovieProviderProps) {
   const [casting, setCasting] = useState<MovieCastProps[]>([])
   const [crew, setCrew] = useState<MovieCrewProps[]>([])
   const [searchResult, setSearchResult] = useState<MovieCardProps[]>([])
+  const [highlight, setHighlight] = useState<MovieCardProps>({
+    id: 0,
+    title: '',
+    poster_path: '',
+    release_date: '',
+    backdrop_path: '',
+    runtime: 0,
+    size: 'normal'
+  })
   const [movieDetail, setMovieDetail] = useState<MovieDetailProps>({
     id: 0,
     title: '',
@@ -99,7 +109,20 @@ export function MovieProvider({ children }: MovieProviderProps) {
 
   async function getTrendingMovies(page: number) {
     const { data } = await fetchTrendingMovies(page)
-    setMovies(data.results)
+    if (page === 1) {
+      setHighlight(data.results[0])
+      data.results = data.results.splice(0)
+      setMovies(data.results)
+    } else {
+      setMovies([...movies, ...data.results])
+    }
+    console.log('movies')
+    console.log(movies)
+  }
+
+  async function updateTrendingMovies(page: number) {
+    const { data } = await fetchTrendingMovies(page)
+    setMovies([...movies, ...data.results])
     console.log(movies)
   }
 
@@ -142,6 +165,7 @@ export function MovieProvider({ children }: MovieProviderProps) {
     <MovieContext.Provider
       value={{
         movies,
+        highlight,
         upcomingMovies,
         movieDetail,
         casting,

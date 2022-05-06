@@ -21,6 +21,17 @@ export const Wrapper = styled.section`
     margin: 0 auto;
   }
 
+  .load-more {
+    width: 185px;
+    height: 278px;
+    margin-top: 0.6%;
+    border-radius: 0.5rem;
+    background-color: ${theme.colors.placeHolder};
+
+    font-size: 1.5rem;
+    color: #fff;
+  }
+
   /* width */
   ::-webkit-scrollbar {
     width: 0.5rem;

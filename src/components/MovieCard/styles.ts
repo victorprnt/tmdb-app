@@ -1,4 +1,6 @@
 import styled, { css } from 'styled-components'
+import theme from '../../styles/light'
+
 import { LogoWrapperProps } from '.'
 import { MovieCardProps } from '../../context/MovieContext'
 
@@ -71,11 +73,25 @@ const wrapperSizeModifiers = {
       font-size: 1.25rem;
       color: #fff;
     }
+
+    &:hover {
+      img {
+        filter: brightness(0.5);
+        transform: scale(1.15);
+      }
+      .title {
+        opacity: 1;
+      }
+      .release {
+        opacity: 1;
+      }
+    }
   `,
   highlight: () => css`
     width: 100%;
     height: 40vh;
     margin-bottom: 3rem;
+    position: relative;
     .movie-infos {
       max-width: fit-content;
       position: absolute;
@@ -87,6 +103,31 @@ const wrapperSizeModifiers = {
         text-align: right;
         font-size: 4.5rem;
       }
+    }
+    .more-info {
+      position: absolute;
+      left: 6rem;
+      bottom: 4rem;
+      /* width: 100%; */
+      color: #fff;
+      font-size: 4rem;
+      z-index: 10;
+
+      border: 1px solid #fff;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        filter: brightness(0.9);
+      }
+    }
+
+    transition: all 0.3s ease-in-out;
+    &:hover .more-info {
+      background-color: ${theme.colors.titleHover};
+      border: 1px solid ${theme.colors.titleHover};
     }
   `
 }

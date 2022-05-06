@@ -1,21 +1,45 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import useInfiniteScroll from 'react-infinite-scroll-hook'
+
 import { MovieContext } from '../../context/MovieContext'
 import MovieCard from '../MovieCard'
 import * as S from './styles'
 
 const MovieGrid = () => {
-  const { movies } = useContext(MovieContext)
+  const { movies, highlight, getTrendingMovies, getUpcomingMovies } =
+    useContext(MovieContext)
+  const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    getTrendingMovies(page)
+    getUpcomingMovies()
+  }, [page])
+
+  function pageForward() {
+    setPage(page + 1)
+  }
+
+  // const [loading, setLoading] = useState(false)
+  // const [hasNextPage, setHasNextPage] = useState(true)
+  // function handleLoadMore() {
+  //   setLoading(true)
+  // }
+  // const [sentryRef, { rootRef }] = useInfiniteScroll({
+  //   loading,
+  //   hasNextPage,
+  //   onLoadMore: handleLoadMore
+  // })
 
   return (
     <S.Wrapper>
-      {!!movies[0] && (
+      {!!highlight && (
         <MovieCard
-          id={movies[0].id}
-          title={movies[0].title}
-          runtime={movies[0].runtime}
-          poster_path={movies[0].poster_path}
-          backdrop_path={movies[0].backdrop_path}
-          release_date={movies[0].release_date}
+          id={highlight.id}
+          title={highlight.title}
+          runtime={highlight.runtime}
+          poster_path={highlight.poster_path}
+          backdrop_path={highlight.backdrop_path}
+          release_date={highlight.release_date}
           size="highlight"
         />
       )}
@@ -40,6 +64,9 @@ const MovieGrid = () => {
             />
           )
         })}
+        <button className="load-more" type="button" onClick={pageForward}>
+          Load More
+        </button>
       </S.MovieGridWrapper>
     </S.Wrapper>
   )
