@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
+import theme from './light'
+
 const GlobalStyles = createGlobalStyle`
   * {
     margin: 0;
@@ -11,12 +13,40 @@ const GlobalStyles = createGlobalStyle`
     font-size: 62.5%;
   }
 
-  html, body, #__next {
+  /* @media (max-width: ${theme.screenSize.laptop}) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+
+  @media (max-width: ${theme.screenSize.tablet}) {
+    html {
+      font-size: 87.5%;
+    }
+  } */
+
+  html, body {
     height: 100%;
   }
 
   body {
+    background-color: ${theme.colors.background};
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  }
+
+  body, input, textarea, select, button {
+    font: 400 1rem "Roboto", sans-serif;
+    color: #fff;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 `
 

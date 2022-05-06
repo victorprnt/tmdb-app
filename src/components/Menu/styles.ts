@@ -5,7 +5,7 @@ export const Wrapper = styled.menu`
   justify-content: space-between;
 
   width: 85%;
-  height: 10vh;
+  height: auto;
   margin: 0 auto;
 
   margin-top: 2rem;
@@ -14,7 +14,7 @@ export const Wrapper = styled.menu`
     display: flex;
     align-items: center;
 
-    a {
+    .menu-item {
       position: relative;
       color: #fff;
       text-decoration: none;

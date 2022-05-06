@@ -6,7 +6,9 @@ export type LogoProps = {
 
 const Logo = ({ size = 'normal' }: LogoProps) => (
   <S.Wrapper size={size}>
-    <img src="/img/tmdb-logo-large.svg" alt="The Movie Database logo image" />
+    <a href="/">
+      <img src="/img/tmdb-logo-large.svg" alt="The Movie Database logo image" />
+    </a>
   </S.Wrapper>
 )
 

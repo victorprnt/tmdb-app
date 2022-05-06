@@ -14,6 +14,12 @@ export default {
     inputText: '#555'
   },
 
+  fontSize: {
+    title: '4rem',
+    smallText: '1.5rem',
+    defaultText: '1.875rem'
+  },
+
   screenSize: {
     mobileL: '425px',
     tablet: '768px',
