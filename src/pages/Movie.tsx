@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useMatch } from 'react-router-dom'
+import Credits from '../components/Credits'
 import { MovieContext } from '../context/MovieContext'
 
 const Movie = () => {
-  const { getMovieDetails, movieDetail } = useContext(MovieContext)
+  const { getMovieDetails, movieDetail, getCredits, casting } =
+    useContext(MovieContext)
+
   const match = useMatch('/movie/:movieId')
   const movieId: string = match?.params.movieId ?? 'No match'
 
   useEffect(() => {
-    getMovieDetails(movieId ?? 'No match')
+    getMovieDetails(movieId)
+    getCredits(movieId)
   }, [movieId])
 
   return (
@@ -32,7 +36,7 @@ const Movie = () => {
         </div>
         <p className="sinopse">{movieDetail.overview}</p>
         {/* <Social movieId={id} /> */}
-        {/* <Credits movieId={id} /> */}
+        {movieDetail && <Credits />}
       </div>
       <div className="poster">
         {/* {smallScreen ? ( */}

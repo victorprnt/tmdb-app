@@ -32,3 +32,14 @@ export async function fetchUpcomingMovies(pageNumber = 1) {
     return { error }
   }
 }
+
+export async function fetchCredits(movieId: string) {
+  try {
+    const { data, status } = await api.get(
+      `/movie/${movieId}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=pt-BR`
+    )
+    return { data, status }
+  } catch (error) {
+    return { error }
+  }
+}

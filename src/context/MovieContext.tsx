@@ -2,7 +2,8 @@ import { createContext, ReactNode, useState } from 'react'
 import {
   fetchUpcomingMovies,
   fetchTrendingMovies,
-  fetchMovieDetail
+  fetchMovieDetail,
+  fetchCredits
 } from '../services/movie-services'
 
 export type MovieCardProps = {
@@ -30,6 +31,20 @@ type MovieGenreProps = {
   name: string
 }
 
+export type MovieCastProps = {
+  id: number
+  name: string
+  profile_path: string
+}
+
+export type MovieCrewProps = {
+  id: number
+  name: string
+  department: string
+  profile_path: string
+  job: string
+}
+
 export type MovieDetailProps = {
   id: number
   title: string
@@ -40,18 +55,18 @@ export type MovieDetailProps = {
   overview: string
   runtime: number
   genres: MovieGenreProps[]
-  // cast: CastProps[];
-  // crew: CrewProps[];
-  // social: SocialProps[];
+  // social: SocialProps[]
 }
 
 interface MovieContextData {
   movies: MovieCardProps[]
   upcomingMovies: UpcomingMovieProps[]
   movieDetail: MovieDetailProps
+  casting: MovieCastProps[]
   getTrendingMovies: (page: number) => void
   getUpcomingMovies: () => void
   getMovieDetails: (movieId: string) => void
+  getCredits: (movieId: string) => void
 }
 
 interface MovieProviderProps {
@@ -63,6 +78,8 @@ export const MovieContext = createContext({} as MovieContextData)
 export function MovieProvider({ children }: MovieProviderProps) {
   const [movies, setMovies] = useState<MovieCardProps[]>([])
   const [upcomingMovies, setUpcomingMovies] = useState<UpcomingMovieProps[]>([])
+  const [casting, setCasting] = useState<MovieCastProps[]>([])
+  const [crew, setCrew] = useState<MovieCrewProps[]>([])
   const [movieDetail, setMovieDetail] = useState<MovieDetailProps>({
     id: 0,
     title: '',
@@ -89,11 +106,20 @@ export function MovieProvider({ children }: MovieProviderProps) {
   }
 
   async function getMovieDetails(movieId: string) {
-    console.table(movieId)
     const { data } = await fetchMovieDetail(movieId)
     setMovieDetail(data)
     console.log('movieDetail')
     console.table(movieDetail)
+  }
+
+  async function getCredits(movieId: string) {
+    const { data } = await fetchCredits(movieId)
+    setCasting(data.cast)
+    console.log('casting')
+    console.log(casting)
+    setCrew(data.crew)
+    console.log('crew')
+    console.log(crew)
   }
 
   return (
@@ -102,9 +128,11 @@ export function MovieProvider({ children }: MovieProviderProps) {
         movies,
         upcomingMovies,
         movieDetail,
+        casting,
         getTrendingMovies,
         getUpcomingMovies,
-        getMovieDetails
+        getMovieDetails,
+        getCredits
       }}
     >
       {children}
